@@ -10,8 +10,8 @@
             <p><router-link v-bind:to="{ name: 'CurrentWeather', params: { cityId: city.id } }">View Current Weather</router-link></p>
 
             <weather-summary v-bind:weatherData="city.weather"></weather-summary>
-            </div>
-            <!-- TODO: Make dl of weather data be in a child component. -->
+            
+            <weather-data v-bind:weatherData="city.main"></weather-data>
             <dl>
                 <dt>Current Temp</dt>
                 <dd>{{ city.main.temp }}&deg;F</dd>
@@ -36,6 +36,7 @@
 <script>
 import {API} from '@/common/api';
 import WeatherSummary from '@/components/WeatherSummary';
+import WeatherData from '@/components/WeatherData';
 
 export default {
   name: 'CitySearch',
@@ -62,7 +63,8 @@ export default {
     }
   },
   components: {
-    'weather-summary': WeatherSummary
+    'weather-summary': WeatherSummary,
+    'weather-data': WeatherData
   }
 }
 </script>
@@ -90,30 +92,6 @@ li {
   padding: 10px;
   margin: 5px;
 }
-.weatherSummary {
-  display: inline-block;
-  width: 100px;
-}
-dl {
-  padding: 5px;
-  background: #e8e8e8;
-}
-dt {
-  float: left;
-  clear: left;
-  width: 120px;
-  text-align: right;
-  font-weight: bold;
-  color: blue;
-}
-dd {
-  margin: 0 0 0 130px;
-  padding: 0 0 0.5em 0;
-}
-dt::after {
-  content: ":";
-}
-
 a {
   color: #42b983;
 }
